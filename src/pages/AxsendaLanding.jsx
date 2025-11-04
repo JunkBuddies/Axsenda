@@ -97,7 +97,7 @@ function HubBubble({ title, subtitle, href, icon: Icon, delay = 0 }) {
       className="relative group"
     >
       <div
-        className={`size-44 sm:size-48 md:size-56 rounded-full ${T.panel} ${T.ring} grid place-items-center relative overflow-hidden`}
+        className={`size-28 sm:size-36 md:size-44 lg:size-56 rounded-full ${T.panel} ${T.ring} grid place-items-center relative overflow-hidden`}
         style={{ boxShadow: "0 0 0 1px #1a1a1a, 0 0 120px rgba(198,168,79,0.08) inset" }}
       >
         <div
@@ -113,12 +113,12 @@ function HubBubble({ title, subtitle, href, icon: Icon, delay = 0 }) {
             boxShadow: `inset 0 0 0 2px rgba(198,168,79,0.12), 0 0 80px rgba(198,168,79,0.14)`,
           }}
         />
-        <Icon className="relative" size={42} style={{ color: T.gold }} />
+        <Icon className="relative sm:scale-100 scale-[0.9]" size={42} style={{ color: T.gold }} />
         <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-center">
-          <div className="text-sm tracking-widest font-medium" style={{ color: T.gold }}>
+          <div className="text-[11px] sm:text-xs tracking-widest font-medium" style={{ color: T.gold }}>
             {title}
           </div>
-          <div className={`text-[11px] ${T.sub}`}>{subtitle}</div>
+          <div className={`text-[10px] sm:text-[11px] ${T.sub}`}>{subtitle}</div>
         </div>
       </div>
     </motion.a>
@@ -128,21 +128,21 @@ function HubBubble({ title, subtitle, href, icon: Icon, delay = 0 }) {
 function HeroMotto() {
   return (
     <div className="text-center">
-      <p className="uppercase tracking-[0.35em] text-xs sm:text-sm mb-2" style={{ color: T.gold }}>
+      <p className="uppercase tracking-[0.35em] text-[10px] sm:text-xs md:text-sm mb-2" style={{ color: T.gold }}>
         The Way Up. The Way Out.
       </p>
-      <h1 className="font-[Cinzel] text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight">
+      <h1 className="font-[Cinzel] text-[clamp(1.75rem,6vw,3.75rem)] leading-tight">
         Freedom <span style={{ color: T.gold }}>Engineered</span>
       </h1>
-      <p className={`mt-4 max-w-xl mx-auto ${T.sub}`}>
+      <p className={`mt-4 mx-auto ${T.sub} max-w-[68ch] px-2 sm:px-0`}>
         A modern education and systems company for builders. Escape the system, build your own,
         and scale with intelligence, execution, and design.
       </p>
-      <div className="mt-6 flex items-center justify-center gap-3">
-        <a href="#/academy" className="rounded-full px-5 py-2 text-black text-sm" style={{ background: T.gold }}>
+      <div className="mt-6 flex items-center justify-center gap-2 sm:gap-3">
+        <a href="#/academy" className="rounded-full px-5 py-2.5 text-black text-sm" style={{ background: T.gold }}>
           Enter Academy
         </a>
-        <a href="#/press" className="rounded-full px-5 py-2 text-sm border border-zinc-800 hover:border-zinc-700">
+        <a href="#/press" className="rounded-full px-5 py-2.5 text-sm border border-zinc-800 hover:border-zinc-700">
           Read Dispatch
         </a>
       </div>
@@ -167,20 +167,21 @@ export default function AxsendaLanding() {
   return (
     <Layout>
       <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pb-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14 md:pt-16 pb-16 md:pb-24">
           <HeroMotto />
           <div className="relative mt-16 md:mt-24">
             <div className="relative grid place-items-center">
-              <div className="relative w-[680px] max-w-full aspect-square">
+              {/* Responsive hub width */}
+              <div className="relative w-[min(92vw,680px)] aspect-square">
                 <Orbits />
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.1 }}
-                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-36 sm:size-40 rounded-full ${T.panel} ${T.ring} grid place-items-center text-center`}
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-28 sm:size-32 md:size-36 rounded-full ${T.panel} ${T.ring} grid place-items-center text-center`}
                   style={{ boxShadow: "0 0 0 1px #1a1a1a, inset 0 0 120px rgba(198,168,79,0.10)" }}
                 >
-                  <span className="font-[Cinzel] tracking-[0.25em] text-sm" style={{ color: T.gold }}>
+                  <span className="font-[Cinzel] tracking-[0.25em] text-xs sm:text-sm" style={{ color: T.gold }}>
                     AXSENDA
                   </span>
                 </motion.div>
