@@ -45,10 +45,11 @@ export default function Layout({ children }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Wordmark />
           <nav className="hidden md:flex items-center gap-8 text-sm">
-            <a href="#/academy" className="hover:opacity-80">Academy</a>
-            <a href="#/labs" className="hover:opacity-80">Labs</a>
-            <a href="#/society" className="hover:opacity-80">Society</a>
-            <a href="#/press" className="hover:opacity-80">Press</a>
+  <a href="#/" className="hover:opacity-80">Home</a>
+  <a href="#/academy" className="hover:opacity-80">Academy</a>
+  <a href="#/labs" className="hover:opacity-80">Labs</a>
+  <a href="#/society" className="hover:opacity-80">Society</a>
+  <a href="#/press" className="hover:opacity-80">Press</a>
             <a
               href="#/academy"
               className="ml-2 inline-flex items-center gap-2 rounded-full px-4 py-2 text-black"
