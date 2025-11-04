@@ -63,6 +63,7 @@ export default function Layout({ children }) {
 
       {/* SIDE NAV */}
       <aside className="fixed left-0 top-16 bottom-0 w-16 hidden md:flex flex-col items-center gap-6 py-8 border-r border-zinc-900">
+        <SideIcon href="#/" label="Home"><ArrowRight size={20} /></SideIcon>
         <SideIcon href="#/academy" label="Academy"><GraduationCap size={20} /></SideIcon>
         <SideIcon href="#/labs" label="Labs"><FlaskConical size={20} /></SideIcon>
         <SideIcon href="#/society" label="Society"><Users size={20} /></SideIcon>
