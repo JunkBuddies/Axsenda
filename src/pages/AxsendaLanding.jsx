@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, BarChart3, Bot, Cpu, FlaskConical, GraduationCap, Layers3, Newspaper, PhoneCall, Users } from "lucide-react";
 import Layout from "../components/Layout";
@@ -16,70 +15,8 @@ function Orbit(){return <div className="relative mx-auto aspect-square w-full ma
 <div className="absolute left-1/2 top-1/2 z-30 flex h-44 w-44 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#d0ad4e]/45 bg-[radial-gradient(circle_at_50%_35%,rgba(198,168,79,.13),rgba(11,11,10,.97)_58%)] text-center shadow-[0_0_85px_rgba(198,168,79,.12)] sm:h-48 sm:w-48"><div className="text-3xl font-semibold tracking-[.18em] text-[#d4b25a]">AX</div><span className="mt-3 text-[9px] uppercase tracking-[.32em] text-[#d9bb67]">AXSENDA</span><span className="mt-2 text-[9px] uppercase tracking-[.18em] text-zinc-500">The ecosystem</span></div></div>}
 
 function RevenueMetric(){return <div className="mt-10 border-t border-white/[.08] pt-6"><p className="text-[9px] uppercase tracking-[.28em] text-[#a98c43]">Ecosystem impact</p><div className="mt-3 flex items-end gap-3"><span className="pb-1 text-xl text-[#d4b258]">$</span><span className="font-mono text-3xl tracking-[.08em] text-zinc-100 sm:text-4xl">0</span></div><p className="mt-2 text-[9px] uppercase tracking-[.24em] text-zinc-600">Revenue generated through AXSENDA</p><p className="mt-2 max-w-sm text-[11px] leading-5 text-zinc-600">This becomes the live total from connected AXSENDA products as revenue events are created.</p></div>}
+
 function Product({icon:Icon,name,status,text,href}){return <a href={href||"#/labs"} className="group rounded-[1.5rem] border border-white/[.08] bg-white/[.025] p-6 transition hover:border-[#c8a64a]/30 hover:bg-[#c8a64a]/[.035]"><div className="flex items-center justify-between"><span className="grid h-12 w-12 place-items-center rounded-full border border-[#c8a64a]/25 text-[#d1ae50]"><Icon size={20}/></span><span className="text-[8px] uppercase tracking-[.2em] text-zinc-600">{status}</span></div><h3 className="mt-8 font-[Cinzel] text-xl text-zinc-100">{name}</h3><p className="mt-3 text-xs leading-5 text-zinc-500">{text}</p><span className="mt-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[.16em] text-[#d4b45b]">Explore <ArrowRight size={12}/></span></a>}
-
-function AcademySequence(){
- const ref=useRef(null);
- const {scrollYProgress:p}=useScroll({target:ref,offset:["start end","end end"]});
-
- const introOpacity=useTransform(p,[0,.014,.20,.34,.41],[0,1,1,1,0]);
- const introY=useTransform(p,[0,.09,.23,.34,.41],["0px","16vh","30vh","30vh","25vh"]);
- const introScale=useTransform(p,[0,.11,.25,.36,.41],[.72,.84,1,1.10,1.15]);
- const wordSpacing=useTransform(p,[0,.12,.30,.41],[".00em",".025em",".075em",".13em"]);
-
- // From first appearance, the atom stays locked to the visual center of the sticky viewport.
- // It may scale/rotate there, but it does not leave center until the card handoff begins.
- const atomOpacity=useTransform(p,[0,.41,.46,.72,.82,.96,1],[0,0,1,1,.78,.78,.55]);
- const atomScale=useTransform(p,[0,.43,.50,.60,.72,.82,1],[.54,.54,.72,1.03,.92,.68,.68]);
- const atomRotate=useTransform(p,[0,.46,.72,.82,1],[0,0,112,152,152]);
- const atomX=useTransform(p,[0,.71,.75,.79,.82,1],["0%","0%","0%","18%","43%","43%"]);
-
- const cardOpacity=useTransform(p,[0,.70,.74,.78,.82,1],[0,0,.28,.76,1,1]);
- const cardY=useTransform(p,[0,.70,.74,.78,.82,1],["50vh","50vh","31vh","14vh","0vh","0vh"]);
- const cardScale=useTransform(p,[0,.74,.78,.82,1],[.97,.97,.99,1,1]);
-
- return <section ref={ref} className="relative h-[285vh] border-t border-white/[.06] bg-[#090908]">
-  <div className="sticky top-[74px] h-[calc(100vh-74px)] overflow-hidden">
-   <div className="axs-circuit-field absolute inset-0 opacity-25"/>
-   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(198,168,79,.10),transparent_40%)]"/>
-
-   <motion.div style={{opacity:introOpacity,y:introY,scale:introScale,letterSpacing:wordSpacing,willChange:"transform, opacity"}} className="pointer-events-none absolute left-0 right-0 top-[18px] z-30 px-6 text-center">
-    <p className="text-[10px] uppercase tracking-[.34em] text-[#b99845]">AXSENDA Academy</p>
-    <h2 className="mt-7 font-[Cinzel] text-[clamp(2.8rem,7.2vw,7.8rem)] leading-[.93] text-[#f3eee1]">YOU WERE NEVER<br/><span className="text-[#d1ad51]">SUPPOSED TO STAY THERE.</span></h2>
-    <p className="mt-8 text-[10px] uppercase tracking-[.42em] text-zinc-500">The way out is built.</p>
-   </motion.div>
-
-   <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[min(58vw,520px)] w-[min(58vw,520px)] -translate-x-1/2 -translate-y-1/2">
-    <motion.div style={{opacity:atomOpacity,scale:atomScale,rotate:atomRotate,x:atomX,willChange:"transform, opacity"}} className="relative h-full w-full">
-     <div className="absolute inset-[3%] rounded-full border border-[#d8b758]/30"/>
-     <div className="absolute inset-[17%] rounded-full border border-white/[.09]"/>
-     <div className="absolute inset-[31%] rounded-full border border-[#c8a64a]/18"/>
-     <div className="absolute left-1/2 top-1/2 h-[92%] w-[34%] -translate-x-1/2 -translate-y-1/2 rotate-[26deg] rounded-[50%] border border-[#d0ae51]/26"/>
-     <div className="absolute left-1/2 top-1/2 h-[92%] w-[34%] -translate-x-1/2 -translate-y-1/2 -rotate-[34deg] rounded-[50%] border border-white/[.09]"/>
-     <div className="absolute left-1/2 top-1/2 h-[34%] w-[92%] -translate-x-1/2 -translate-y-1/2 rotate-[8deg] rounded-[50%] border border-[#c8a64a]/22"/>
-     <div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#d6b653]/45 bg-[#11110f] shadow-[0_0_75px_rgba(198,168,79,.14)]"><GraduationCap className="text-[#ddb958]" size={31}/></div>
-    </motion.div>
-   </div>
-
-   <motion.div style={{opacity:cardOpacity,y:cardY,scale:cardScale,willChange:"transform, opacity"}} className="absolute inset-0 z-20 flex items-center justify-center px-5 py-5 sm:px-8 lg:px-10">
-    <div className="grid w-full max-w-[1380px] items-center gap-10 lg:grid-cols-[.95fr_1.05fr]">
-     <div className="mx-auto w-full max-w-[660px] rounded-[1.8rem] border border-[#c8a64a]/18 bg-[linear-gradient(145deg,rgba(20,20,17,.97),rgba(10,10,9,.96))] p-6 shadow-[0_30px_110px_rgba(0,0,0,.48)] backdrop-blur-xl sm:p-7 lg:p-8">
-      <div className="flex items-center justify-between border-b border-white/[.07] pb-4"><div><p className="text-[9px] uppercase tracking-[.31em] text-[#c7a447]">AXSENDA Academy</p><p className="mt-1 text-[9px] uppercase tracking-[.18em] text-zinc-600">Education · systems · execution</p></div><div className="grid h-10 w-10 place-items-center rounded-full border border-[#c8a64a]/25 bg-[#c8a64a]/[.05]"><GraduationCap size={18} className="text-[#d5b354]"/></div></div>
-      <h2 className="mt-5 font-[Cinzel] text-[clamp(2rem,3.45vw,3.95rem)] leading-[.98] text-[#f1ede2]">Learn to build what can<br/><span className="text-[#d4ae4e]">change your life.</span></h2>
-      <p className="mt-4 max-w-xl text-[13px] leading-[1.5rem] text-zinc-300">Most people are taught how to work inside systems someone else built. Academy teaches you how to create leverage of your own — through skills, products, distribution, sales, software, and execution.</p>
-      <p className="mt-3 max-w-xl text-[11px] leading-5 text-zinc-500">Learn from experienced coaches. Turn skills and ideas into digital products. Position them, sell them, automate what can be automated, and build with the same AXSENDA software ecosystem designed for the businesses you are learning to create.</p>
-      <div className="mt-5 grid gap-2 sm:grid-cols-2"><AcademyPoint title="LEARN" text="Coaching and practical instruction built around execution."/><AcademyPoint title="BUILD" text="Create products, offers, systems, and real assets."/><AcademyPoint title="LAUNCH" text="Position, distribute, sell, and reach real customers."/><AcademyPoint title="LEVERAGE" text="AXSENDA Labs tools and Society access included."/></div>
-      <p className="mt-5 border-l border-[#c8a64a]/45 pl-4 text-[13px] leading-5 text-zinc-300">You do not come here to consume more content. <span className="text-[#dec36c]">You come here to leave capable of building something that pays.</span></p>
-      <div className="mt-5 flex flex-wrap items-center gap-3"><a href="#/academy" className="inline-flex items-center gap-2 rounded-full border border-[#c8a64a]/50 bg-[#c8a64a]/[.08] px-5 py-2.5 text-[11px] uppercase tracking-[.13em] text-[#e0c36d]">Enter AXSENDA Academy <ArrowRight size={13}/></a><span className="text-[8px] uppercase tracking-[.18em] text-zinc-600">Academy · Labs Access · Society Included</span></div>
-     </div>
-     <div className="hidden lg:block"/>
-    </div>
-   </motion.div>
-  </div>
- </section>
-}
-
-function AcademyPoint({title,text}){return <div className="rounded-xl border border-white/[.07] bg-white/[.025] px-3.5 py-2.5"><p className="text-[8px] font-semibold tracking-[.18em] text-[#c6a64e]">{title}</p><p className="mt-1 text-[10px] leading-4 text-zinc-500">{text}</p></div>}
 
 export default function AxsendaLanding(){
  const {scrollYProgress}=useScroll();
@@ -112,9 +49,8 @@ export default function AxsendaLanding(){
 
   <section className="relative z-10 py-24"><div className="mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-10"><div className="text-center"><p className="text-[10px] uppercase tracking-[.3em] text-[#b99743]">AXSENDA Labs</p><h2 className="mt-4 font-[Cinzel] text-4xl sm:text-5xl">Software that creates leverage.</h2></div><div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"><Product icon={PhoneCall} name="Capture" status="Live build" text="AI call handling, lead capture, scheduling, quoting, and business intelligence."/><Product icon={Bot} name="Automate" status="Coming later" text="Automations that move work forward without requiring constant attention."/><Product icon={Layers3} name="Operate" status="Coming later" text="Customers, workflows, data, and operations connected into one system."/><Product icon={Cpu} name="Build" status="AXSENDA Labs" text="New tools engineered around real business problems and measurable outcomes."/></div></div></section>
 
-  <AcademySequence/>
-
   <section className="relative overflow-hidden border-t border-white/[.06] py-28"><div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_100%,rgba(198,168,79,.10),transparent_35%)]"/><div className="relative z-10 mx-auto grid max-w-[1480px] gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:px-10"><div className="flex min-h-[390px] items-center justify-center"><div className="relative h-80 w-80 rounded-full border border-[#c8a64a]/18 shadow-[0_0_100px_rgba(198,168,79,.06)]"><div className="absolute inset-[15%] rounded-full border border-white/[.07]"/><div className="absolute inset-[30%] grid place-items-center rounded-full border border-[#c8a64a]/25 bg-[#11110f]"><Users className="text-[#d0ad4e]" size={30}/></div></div></div><div className="flex flex-col justify-center"><p className="text-[10px] uppercase tracking-[.3em] text-[#c7a447]">AXSENDA Society</p><h2 className="mt-5 font-[Cinzel] text-4xl leading-tight sm:text-5xl">Build alone when you need to.<br/><span className="text-[#d0ad4e]">Not because you have to.</span></h2><p className="mt-6 max-w-xl text-sm leading-7 text-zinc-400">Membership brings the software ecosystem together with people building businesses, projects, skills, and income of their own.</p><a href="#/society" className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-[#c8a64a]/35 px-5 py-3 text-xs uppercase tracking-[.14em] text-[#d9ba62]">Explore Society <ArrowRight size={13}/></a></div></div></section>
  </Layout>
 }
+
 function Stat({label,value}){return <div className="rounded-xl border border-white/[.06] bg-white/[.025] p-4"><p className="text-[9px] uppercase tracking-[.16em] text-zinc-600">{label}</p><p className="mt-3 font-mono text-xl text-zinc-200">{value}</p></div>}
