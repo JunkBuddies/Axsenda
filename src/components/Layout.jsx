@@ -1,37 +1,16 @@
-import { ArrowRight, FlaskConical, GraduationCap, Newspaper, Users } from "lucide-react";
+import { ArrowUpRight, FlaskConical, GraduationCap, Menu, Newspaper, Users } from "lucide-react";
 
-const T = {
-  bg: "bg-[#0A0A0A]",
-  panel: "bg-[#0F0F0F]",
-  gold: "#C6A84F",
-  text: "text-[#F8F8F8]",
-  sub: "text-zinc-400",
-  ring: "ring-1 ring-zinc-800",
-};
+const gold = "#C6A84F";
 
-function Wordmark({ className = "" }) {
+export function Wordmark({ compact = false }) {
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <div className="h-3 w-3 rounded-full" style={{ background: T.gold }} />
-      <span className="font-[Cinzel] tracking-[0.2em] text-xl" style={{ color: T.gold }}>
-        AXSENDA
+    <a href="#/" className="inline-flex items-center gap-3 group">
+      <span className="relative grid h-8 w-8 place-items-center rounded-xl border border-[#C6A84F]/25 bg-[#C6A84F]/[0.06] shadow-[0_0_40px_rgba(198,168,79,.08)]">
+        <span className="h-2 w-2 rotate-45 border border-[#E7CD78]" />
       </span>
-    </div>
-  );
-}
-
-function SideIcon({ href, label, children }) {
-  return (
-    <a href={href} className="group relative">
-      <div
-        className={`h-12 w-12 rounded-2xl ${T.panel} ${T.ring} grid place-items-center transition-transform group-hover:-translate-y-0.5`}
-      >
-        <div className="opacity-90 group-hover:opacity-100" style={{ color: T.gold }}>
-          {children}
-        </div>
-      </div>
-      <span className="absolute left-14 top-1/2 -translate-y-1/2 text-xs bg-black/70 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity border border-zinc-800">
-        {label}
+      <span>
+        <span className="block font-[Cinzel] text-sm sm:text-base tracking-[0.30em] text-[#D9BC63]">AXSENDA</span>
+        {!compact && <span className="hidden sm:block mt-0.5 text-[9px] uppercase tracking-[0.28em] text-zinc-600">Freedom Engineered</span>}
       </span>
     </a>
   );
@@ -39,51 +18,47 @@ function SideIcon({ href, label, children }) {
 
 export default function Layout({ children }) {
   return (
-    <div className={`min-h-screen ${T.bg} ${T.text} relative`}>
-      {/* TOP NAV */}
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/40 border-b border-zinc-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div className="min-h-screen bg-[#070707] text-[#F7F5EE] selection:bg-[#C6A84F]/30 selection:text-white">
+      <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#080808]/85 backdrop-blur-2xl">
+        <div className="mx-auto flex h-[74px] max-w-[1480px] items-center justify-between px-5 sm:px-8 lg:px-10">
           <Wordmark />
-          <nav className="hidden md:flex items-center gap-8 text-sm">
-  <a href="#/" className="hover:opacity-80">Home</a>
-  <a href="#/academy" className="hover:opacity-80">Academy</a>
-  <a href="#/labs" className="hover:opacity-80">Labs</a>
-  <a href="#/society" className="hover:opacity-80">Society</a>
-  <a href="#/press" className="hover:opacity-80">Press</a>
-            <a
-              href="#/academy"
-              className="ml-2 inline-flex items-center gap-2 rounded-full px-4 py-2 text-black"
-              style={{ background: T.gold }}
-            >
-              Apply <ArrowRight size={16} />
+          <nav className="hidden items-center gap-1 lg:flex">
+            {[
+              ["Home", "#/"],
+              ["Labs", "#/labs"],
+              ["Academy", "#/academy"],
+              ["Society", "#/society"],
+              ["Press", "#/press"],
+            ].map(([label, href]) => (
+              <a key={label} href={href} className="rounded-full px-4 py-2 text-sm text-zinc-400 transition hover:bg-white/[0.04] hover:text-white">{label}</a>
+            ))}
+            <a href="#/labs" className="ml-3 inline-flex items-center gap-2 rounded-full border border-[#C6A84F]/35 bg-[#C6A84F]/[0.07] px-4 py-2 text-sm text-[#E5C86F] transition hover:border-[#C6A84F]/60 hover:bg-[#C6A84F]/[0.11]">
+              Explore Labs <ArrowUpRight size={15} />
             </a>
           </nav>
+          <button className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.025] lg:hidden" aria-label="Open menu"><Menu size={18} /></button>
         </div>
       </header>
 
-      {/* SIDE NAV */}
-      <aside className="fixed left-0 top-16 bottom-0 w-16 hidden md:flex flex-col items-center gap-6 py-8 border-r border-zinc-900">
-        <SideIcon href="#/" label="Home"><ArrowRight size={20} /></SideIcon>
-        <SideIcon href="#/academy" label="Academy"><GraduationCap size={20} /></SideIcon>
-        <SideIcon href="#/labs" label="Labs"><FlaskConical size={20} /></SideIcon>
-        <SideIcon href="#/society" label="Society"><Users size={20} /></SideIcon>
-        <SideIcon href="#/press" label="Press"><Newspaper size={20} /></SideIcon>
-      </aside>
+      <main className="relative overflow-hidden">{children}</main>
 
-      {/* MAIN CONTENT */}
-      <main className="relative md:ml-16">{children}</main>
+      <footer className="relative z-10 border-t border-white/[0.07] bg-[#080808]">
+        <div className="mx-auto grid max-w-[1480px] gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[1fr_auto] lg:px-10">
+          <div><Wordmark compact /><p className="mt-4 max-w-xl text-sm leading-6 text-zinc-500">AXSENDA builds systems, software, education, and infrastructure for people and businesses creating their own path forward.</p></div>
+          <div className="flex flex-wrap items-start gap-x-8 gap-y-3 text-sm text-zinc-500 lg:justify-end">
+            <a href="#/labs" className="hover:text-white">Labs</a><a href="#/academy" className="hover:text-white">Academy</a><a href="#/press" className="hover:text-white">Press</a><a href="#/privacy" className="hover:text-white">Privacy</a><a href="#/terms" className="hover:text-white">Terms</a>
+          </div>
+        </div>
+        <div className="border-t border-white/[0.05]"><div className="mx-auto flex max-w-[1480px] flex-col gap-2 px-5 py-5 text-[11px] text-zinc-600 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10"><span>© {new Date().getFullYear()} AXSENDA. All rights reserved.</span><span>AXSENDA Labs · AXSENDA Capture</span></div></div>
+      </footer>
 
-      {/* Glow & Vignette */}
-      <div className="pointer-events-none fixed inset-0" aria-hidden>
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(60% 60% at 50% 40%, rgba(198,168,79,0.10) 0%, rgba(0,0,0,0.0) 60%)",
-          }}
-        />
-        <div className="absolute inset-0" style={{ boxShadow: "inset 0 0 180px rgba(0,0,0,0.75)" }} />
+      <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(198,168,79,.12),transparent_34%),radial-gradient(circle_at_80%_35%,rgba(198,168,79,.045),transparent_28%)]" />
+        <div className="absolute inset-0 opacity-[0.035]" style={{backgroundImage:"linear-gradient(rgba(255,255,255,.7) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.7) 1px,transparent 1px)",backgroundSize:"80px 80px"}} />
       </div>
     </div>
   );
 }
+
+export const divisionIcons = { Labs: FlaskConical, Academy: GraduationCap, Society: Users, Press: Newspaper };
+export { gold };
