@@ -20,25 +20,28 @@ function Product({icon:Icon,name,status,text,href}){return <a href={href||"#/lab
 
 function AcademySequence(){
  const ref=useRef(null);
- const {scrollYProgress:p}=useScroll({target:ref,offset:["start end","end start"]});
+ // IMPORTANT: progress now ends when the Academy/Society boundary reaches the
+ // bottom of the viewport — the same moment the sticky Academy stage releases.
+ const {scrollYProgress:p}=useScroll({target:ref,offset:["start end","end end"]});
 
- // Same visual pacing as before, remapped so the extra length is spent at the bottom hold.
- const introOpacity=useTransform(p,[0,.011,.151,.258,.312],[0,1,1,1,0]);
- const introY=useTransform(p,[0,.071,.178,.258,.312],["0px","18vh","31vh","31vh","27vh"]);
- const introScale=useTransform(p,[0,.089,.196,.276,.312],[.72,.84,1,1.10,1.15]);
- const wordSpacing=useTransform(p,[0,.098,.232,.312],[".00em",".025em",".075em",".13em"]);
+ // WORDS — begin immediately after the Academy border enters the viewport.
+ const introOpacity=useTransform(p,[0,.014,.20,.34,.41],[0,1,1,1,0]);
+ const introY=useTransform(p,[0,.09,.23,.34,.41],["0px","16vh","30vh","30vh","25vh"]);
+ const introScale=useTransform(p,[0,.11,.25,.36,.41],[.72,.84,1,1.10,1.15]);
+ const wordSpacing=useTransform(p,[0,.12,.30,.41],[".00em",".025em",".075em",".13em"]);
 
- const atomOpacity=useTransform(p,[0,.276,.339,.517,.588,.677],[0,0,1,1,.9,.25]);
- const atomScale=useTransform(p,[0,.303,.374,.481,.561,.677],[.18,.18,.58,1.36,1,.68]);
- const atomRotate=useTransform(p,[0,.321,.579,.677],[0,0,142,178]);
- const atomX=useTransform(p,[0,.508,.588,.677],["0%","0%","15%","33%"]);
- const atomY=useTransform(p,[0,.374,.552,.677],["5%","0%","0%","-1%"]);
+ // ATOM — gets the middle of the timeline and then yields to the final card.
+ const atomOpacity=useTransform(p,[0,.36,.43,.64,.71,.80],[0,0,1,1,.92,.20]);
+ const atomScale=useTransform(p,[0,.39,.47,.60,.69,.80],[.18,.18,.58,1.36,1,.68]);
+ const atomRotate=useTransform(p,[0,.41,.72,.80],[0,0,142,178]);
+ const atomX=useTransform(p,[0,.64,.72,.80],["0%","0%","15%","33%"]);
+ const atomY=useTransform(p,[0,.48,.68,.80],["5%","0%","0%","-1%"]);
 
- // The Academy card now settles at the same point, then remains inside the sticky animation
- // until the Society border actually arrives.
- const contentOpacity=useTransform(p,[0,.544,.606,.784,.985,1],[0,0,1,1,1,0]);
- const contentY=useTransform(p,[0,.535,.606,.668,.793,.985,1],["62vh","62vh","24vh","0vh","0vh","0vh","-6vh"]);
- const contentScale=useTransform(p,[0,.579,.668,.838,1],[.96,.96,1,1,1]);
+ // FINAL STATE — the card is now guaranteed to arrive before sticky release,
+ // settle dead-center, and hold until the Society border reaches the viewport.
+ const contentOpacity=useTransform(p,[0,.66,.72,.78,.985,1],[0,0,.55,1,1,1]);
+ const contentY=useTransform(p,[0,.65,.72,.80,.985,1],["62vh","62vh","24vh","0vh","0vh","0vh"]);
+ const contentScale=useTransform(p,[0,.70,.80,1],[.96,.96,1,1]);
 
  return <section ref={ref} className="relative h-[287vh] border-t border-white/[.06] bg-[#090908]">
   <div className="sticky top-[74px] h-[calc(100vh-74px)] overflow-hidden">
