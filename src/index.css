@@ -15,9 +15,15 @@ button,input,textarea,select { font:inherit; }
 
 @keyframes axsenda-orbit-spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 @keyframes axsenda-orbit-counter { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
-.axs-orbit-spinner { animation:axsenda-orbit-spin 88s linear infinite; }
+.axs-orbit-spinner { animation:axsenda-orbit-spin 88s linear infinite; transform-origin:50% 50%; }
 .axs-orbit-counter { animation:axsenda-orbit-counter 88s linear infinite; }
-.axs-orbit-node { transform:rotate(var(--orbit-angle)) translateY(-274px) rotate(calc(var(--orbit-angle) * -1)); transform-origin:center; }
 
-@media(max-width:640px){ .axs-orbit-node { transform:rotate(var(--orbit-angle)) translateY(-42vw) rotate(calc(var(--orbit-angle) * -1)); } }
+/* Every node center is pinned directly to the circumference of the same
+   inset-[5%] element that draws the visible outer orbit. */
+.axs-orbit-node { position:absolute; z-index:20; transform:translate(-50%,-50%); }
+.axs-orbit-top { left:50%; top:0; }
+.axs-orbit-right { left:100%; top:50%; }
+.axs-orbit-bottom { left:50%; top:100%; }
+.axs-orbit-left { left:0; top:50%; }
+
 @media(prefers-reduced-motion:reduce){ html{scroll-behavior:auto}.axs-orbit-spinner,.axs-orbit-counter{animation-play-state:paused} }
