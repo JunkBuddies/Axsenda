@@ -28,17 +28,17 @@ function AcademySequence(){
  const introScale=useTransform(p,[0,.11,.25,.36,.41],[.72,.84,1,1.10,1.15]);
  const wordSpacing=useTransform(p,[0,.12,.30,.41],[".00em",".025em",".075em",".13em"]);
 
- // Atom remains centered through its full reveal/build. It only moves right
- // once the Academy card itself begins entering the viewport.
- const atomOpacity=useTransform(p,[0,.38,.43,.68,.79,.96,1],[0,0,1,1,.78,.78,.55]);
- const atomScale=useTransform(p,[0,.40,.48,.58,.68,.79,1],[.54,.54,.72,1.03,.90,.68,.68]);
- const atomRotate=useTransform(p,[0,.42,.68,.79,1],[0,0,112,152,152]);
- const atomX=useTransform(p,[0,.66,.70,.75,.79,1],["0%","0%","0%","18%","43%","43%"]);
+ // Give the headline room to clear first. The atom appears lower, stays centered
+ // in the active viewport for a long beat, then shifts right only for the card handoff.
+ const atomOpacity=useTransform(p,[0,.41,.46,.72,.82,.96,1],[0,0,1,1,.78,.78,.55]);
+ const atomScale=useTransform(p,[0,.43,.50,.60,.72,.82,1],[.54,.54,.72,1.03,.92,.68,.68]);
+ const atomRotate=useTransform(p,[0,.46,.72,.82,1],[0,0,112,152,152]);
+ const atomX=useTransform(p,[0,.71,.75,.79,.82,1],["0%","0%","0%","18%","43%","43%"]);
 
- // Card rises while the atom transitions from center to the right.
- const cardOpacity=useTransform(p,[0,.64,.68,.73,.79,1],[0,0,.30,.78,1,1]);
- const cardY=useTransform(p,[0,.64,.68,.73,.79,1],["48vh","48vh","30vh","13vh","0vh","0vh"]);
- const cardScale=useTransform(p,[0,.68,.73,.79,1],[.97,.97,.99,1,1]);
+ // Card waits until after the centered atom follow, then rises into the handoff.
+ const cardOpacity=useTransform(p,[0,.70,.74,.78,.82,1],[0,0,.28,.76,1,1]);
+ const cardY=useTransform(p,[0,.70,.74,.78,.82,1],["50vh","50vh","31vh","14vh","0vh","0vh"]);
+ const cardScale=useTransform(p,[0,.74,.78,.82,1],[.97,.97,.99,1,1]);
 
  return <section ref={ref} className="relative h-[285vh] border-t border-white/[.06] bg-[#090908]">
   <div className="sticky top-[74px] h-[calc(100vh-74px)] overflow-hidden">
@@ -51,7 +51,7 @@ function AcademySequence(){
     <p className="mt-8 text-[10px] uppercase tracking-[.42em] text-zinc-500">The way out is built.</p>
    </motion.div>
 
-   <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[min(58vw,520px)] w-[min(58vw,520px)] -translate-x-1/2 -translate-y-1/2">
+   <div className="pointer-events-none absolute left-1/2 top-[61%] z-10 h-[min(58vw,520px)] w-[min(58vw,520px)] -translate-x-1/2 -translate-y-1/2">
     <motion.div style={{opacity:atomOpacity,scale:atomScale,rotate:atomRotate,x:atomX,willChange:"transform, opacity"}} className="relative h-full w-full">
      <div className="absolute inset-[3%] rounded-full border border-[#d8b758]/30"/>
      <div className="absolute inset-[17%] rounded-full border border-white/[.09]"/>
