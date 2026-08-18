@@ -21,38 +21,56 @@ function Product({icon:Icon,name,status,text,href}){return <a href={href||"#/lab
 function AcademySequence(){
  const ref=useRef(null);
  const {scrollYProgress:p}=useScroll({target:ref,offset:["start start","end end"]});
- const introOpacity=useTransform(p,[0,.07,.21,.31],[0,1,1,0]);
- const introScale=useTransform(p,[0,.16,.31],[.9,1,1.05]);
- const wordSpacing=useTransform(p,[0,.18,.31],[".02em",".07em",".12em"]);
- const atomScale=useTransform(p,[0,.12,.32,.52,.64,.92,1],[.22,.34,1.42,1.02,.62,.62,.56]);
- const atomRotate=useTransform(p,[0,.64,.92,1],[0,128,128,155]);
- const atomX=useTransform(p,[0,.38,.58,.64,.92,1],["0%","0%","18%","39%","39%","44%"]);
- const atomOpacity=useTransform(p,[0,.06,.2,.94,1],[0,.35,1,1,.55]);
- const contentOpacity=useTransform(p,[0,.42,.56,.92,.98,1],[0,0,1,1,1,0]);
- const contentY=useTransform(p,[0,.46,.61,.92,.98,1],[36,24,0,0,0,-18]);
- const contentScale=useTransform(p,[0,.5,.62,.92,1],[.98,.98,1,1,.99]);
- return <section ref={ref} className="relative h-[190vh] border-y border-white/[.06] bg-[#090908]">
+
+ // CHAPTER 1 — WORDS: long build, centered hold, then fade.
+ const introOpacity=useTransform(p,[0,.045,.20,.31,.37],[0,1,1,1,0]);
+ const introScale=useTransform(p,[0,.11,.24,.34,.37],[.72,.88,1,1.09,1.14]);
+ const wordSpacing=useTransform(p,[0,.12,.28,.37],[".00em",".035em",".085em",".14em"]);
+ const introY=useTransform(p,[0,.12,.30,.37],[40,12,0,-16]);
+
+ // CHAPTER 2 — ATOM: appears only after the words have earned the space.
+ const atomOpacity=useTransform(p,[0,.31,.38,.61,.69,.78],[0,0,1,1,.92,.22]);
+ const atomScale=useTransform(p,[0,.34,.43,.57,.67,.78],[.18,.18,.62,1.42,1.02,.72]);
+ const atomRotate=useTransform(p,[0,.36,.68,.78],[0,0,150,185]);
+ const atomX=useTransform(p,[0,.55,.66,.78],["0%","0%","17%","34%"]);
+ const atomY=useTransform(p,[0,.46,.61,.78],["8%","0%","0%","-2%"]);
+
+ // CHAPTER 3 — CARD: rises from below, centers, holds, then releases.
+ const contentOpacity=useTransform(p,[0,.64,.72,.90,.97,1],[0,0,1,1,1,0]);
+ const contentY=useTransform(p,[0,.64,.72,.78,.94,.98,1],["36vh","36vh","14vh","0vh","0vh","-4vh","-10vh"]);
+ const contentScale=useTransform(p,[0,.68,.78,.96,1],[.95,.95,1,1,.99]);
+ const atomFinalOpacity=useTransform(p,[0,.70,.78,.94,.98,1],[1,1,.72,.72,.45,0]);
+
+ return <section ref={ref} className="relative h-[320vh] border-y border-white/[.06] bg-[#090908]">
   <div className="sticky top-[74px] h-[calc(100vh-74px)] overflow-hidden">
    <div className="axs-circuit-field absolute inset-0 opacity-25"/><div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(198,168,79,.10),transparent_42%)]"/>
-   <motion.div style={{opacity:introOpacity,scale:introScale,letterSpacing:wordSpacing}} className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-6 text-center">
+
+   <motion.div style={{opacity:introOpacity,scale:introScale,letterSpacing:wordSpacing,y:introY,willChange:"transform, opacity"}} className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center px-6 text-center">
     <p className="text-[10px] uppercase tracking-[.34em] text-[#b99845]">AXSENDA Academy</p>
-    <h2 className="mt-6 font-[Cinzel] text-[clamp(2.7rem,7vw,7.4rem)] leading-[.94] text-[#f3eee1]">YOU WERE NEVER<br/><span className="text-[#d1ad51]">SUPPOSED TO STAY THERE.</span></h2>
-    <p className="mt-7 text-[10px] uppercase tracking-[.38em] text-zinc-500">The way out is built.</p>
+    <h2 className="mt-7 font-[Cinzel] text-[clamp(2.8rem,7.2vw,7.8rem)] leading-[.93] text-[#f3eee1]">YOU WERE NEVER<br/><span className="text-[#d1ad51]">SUPPOSED TO STAY THERE.</span></h2>
+    <p className="mt-8 text-[10px] uppercase tracking-[.42em] text-zinc-500">The way out is built.</p>
    </motion.div>
-   <motion.div style={{scale:atomScale,rotate:atomRotate,x:atomX,opacity:atomOpacity,willChange:"transform, opacity"}} className="absolute left-1/2 top-1/2 h-[min(68vw,650px)] w-[min(68vw,650px)] -translate-x-1/2 -translate-y-1/2">
+
+   <motion.div style={{scale:atomScale,rotate:atomRotate,x:atomX,y:atomY,opacity:atomOpacity,willChange:"transform, opacity"}} className="absolute left-1/2 top-1/2 h-[min(72vw,700px)] w-[min(72vw,700px)] -translate-x-1/2 -translate-y-1/2">
     <div className="absolute inset-[4%] rounded-full border border-[#d2b151]/28"/><div className="absolute inset-[21%] rounded-full border border-white/[.10]"/><div className="absolute inset-[36%] rounded-full border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[92%] w-[36%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[36%] w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-white/[.09]"/><div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#d6b653]/45 bg-[#11110f] shadow-[0_0_80px_rgba(198,168,79,.13)]"><GraduationCap className="text-[#ddb958]" size={30}/></div>
    </motion.div>
-   <motion.div style={{opacity:contentOpacity,y:contentY,scale:contentScale,willChange:"transform, opacity"}} className="absolute inset-0 z-20 flex items-center justify-center px-5 py-4 sm:px-8 lg:px-10">
-    <div className="grid w-full max-w-[1480px] items-center lg:grid-cols-[.92fr_1.08fr]">
-     <div className="w-full max-w-[620px] max-h-[calc(100vh-112px)] overflow-hidden rounded-[1.65rem] border border-white/[.085] bg-[#0b0b09]/92 p-5 shadow-[0_28px_90px_rgba(0,0,0,.38)] backdrop-blur-xl sm:p-6 lg:p-7">
+
+   <motion.div style={{opacity:contentOpacity,y:contentY,scale:contentScale,willChange:"transform, opacity"}} className="absolute inset-0 z-20 flex items-center justify-center px-5 py-5 sm:px-8 lg:px-10">
+    <div className="grid w-full max-w-[1480px] items-center gap-8 lg:grid-cols-[.95fr_1.05fr]">
+     <div className="mx-auto w-full max-w-[650px] rounded-[1.75rem] border border-white/[.085] bg-[#0b0b09]/94 p-6 shadow-[0_30px_100px_rgba(0,0,0,.42)] backdrop-blur-xl sm:p-7 lg:p-8">
       <p className="text-[9px] uppercase tracking-[.31em] text-[#c7a447]">AXSENDA Academy</p>
-      <h2 className="mt-3 font-[Cinzel] text-[clamp(2rem,3.5vw,4rem)] leading-[.98] text-[#f1ede2]">Learn to build what can<br/><span className="text-[#d4ae4e]">change your life.</span></h2>
+      <h2 className="mt-3 font-[Cinzel] text-[clamp(2.05rem,3.7vw,4.2rem)] leading-[.98] text-[#f1ede2]">Learn to build what can<br/><span className="text-[#d4ae4e]">change your life.</span></h2>
       <p className="mt-4 max-w-xl text-[13px] leading-[1.55rem] text-zinc-300">Most people are taught how to work inside systems someone else built. Academy is built to teach you how to create your own leverage — through skills, products, distribution, sales, software, and execution.</p>
       <p className="mt-2 max-w-xl text-[11px] leading-5 text-zinc-500">Learn from experienced coaches. Turn skills and ideas into digital products. Learn how to position, sell, automate, and grow them. Then build with the same AXSENDA software ecosystem designed for the businesses you are learning to create.</p>
       <div className="mt-4 grid gap-2 sm:grid-cols-2"><AcademyPoint title="LEARN" text="Coaching and practical instruction built around execution."/><AcademyPoint title="BUILD" text="Create products, offers, systems, and real assets."/><AcademyPoint title="LAUNCH" text="Learn positioning, distribution, sales, and customers."/><AcademyPoint title="LEVERAGE" text="AXSENDA Labs tools and Society access included."/></div>
       <p className="mt-4 border-l border-[#c8a64a]/45 pl-4 text-[13px] leading-5 text-zinc-300">You do not come here to consume more content. <span className="text-[#dec36c]">You come here to leave capable of building something that pays.</span></p>
-      <div className="mt-4 flex flex-wrap items-center gap-3"><a href="#/academy" className="inline-flex items-center gap-2 rounded-full border border-[#c8a64a]/50 bg-[#c8a64a]/[.08] px-5 py-2.5 text-[11px] uppercase tracking-[.13em] text-[#e0c36d]">Enter AXSENDA Academy <ArrowRight size={13}/></a><span className="text-[8px] uppercase tracking-[.18em] text-zinc-600">Academy · Labs Access · Society Included</span></div>
+      <div className="mt-5 flex flex-wrap items-center gap-3"><a href="#/academy" className="inline-flex items-center gap-2 rounded-full border border-[#c8a64a]/50 bg-[#c8a64a]/[.08] px-5 py-2.5 text-[11px] uppercase tracking-[.13em] text-[#e0c36d]">Enter AXSENDA Academy <ArrowRight size={13}/></a><span className="text-[8px] uppercase tracking-[.18em] text-zinc-600">Academy · Labs Access · Society Included</span></div>
      </div>
+     <motion.div style={{opacity:atomFinalOpacity}} className="pointer-events-none hidden items-center justify-center lg:flex">
+      <div className="relative h-[430px] w-[430px]">
+       <div className="absolute inset-[3%] rounded-full border border-[#c8a64a]/20"/><div className="absolute inset-[20%] rounded-full border border-white/[.08]"/><div className="absolute inset-[34%] rounded-full border border-[#c8a64a]/18"/><div className="absolute left-1/2 top-1/2 h-[88%] w-[35%] -translate-x-1/2 -translate-y-1/2 rotate-[28deg] rounded-[50%] border border-[#c8a64a]/20"/><div className="absolute left-1/2 top-1/2 h-[35%] w-[88%] -translate-x-1/2 -translate-y-1/2 -rotate-[22deg] rounded-[50%] border border-white/[.08]"/><div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#d6b653]/40 bg-[#11110f]"><GraduationCap className="text-[#ddb958]" size={30}/></div>
+      </div>
+     </motion.div>
     </div>
    </motion.div>
   </div>
