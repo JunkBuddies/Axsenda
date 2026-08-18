@@ -1,33 +1,7 @@
+import { ArrowRight, Brain, CalendarDays, MessageSquareText, PhoneCall, Sparkles } from "lucide-react";
 import Layout from "../components/Layout";
 
-export default function Labs() {
-  return (
-    <Layout>
-      <section className="px-4 sm:px-6 lg:px-8 py-14 sm:py-20 md:py-24 max-w-4xl mx-auto text-center">
-        <h1 className="font-[Cinzel] text-[clamp(1.75rem,5vw,2.5rem)] mb-4 text-[#C6A84F]">
-          AXSENDA Labs
-        </h1>
-        <p className="text-zinc-400 leading-relaxed text-sm sm:text-base px-2 sm:px-0">
-          Tools & automation for creators.{" "}
-          Build once, scale forever.
-        </p>
-
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-          <a
-            href="#/academy"
-            className="rounded-full px-5 py-2.5 text-black text-sm sm:text-base"
-            style={{ background: "#C6A84F" }}
-          >
-            View Academy
-          </a>
-          <a
-            href="#/society"
-            className="rounded-full px-5 py-2.5 text-sm sm:text-base border border-zinc-800 hover:border-zinc-700"
-          >
-            Join Society
-          </a>
-        </div>
-      </section>
-    </Layout>
-  );
-}
+export default function Labs(){return <Layout><section className="relative z-10"><div className="mx-auto max-w-[1480px] px-5 py-20 sm:px-8 lg:px-10 lg:py-28"><p className="text-[10px] uppercase tracking-[.3em] text-[#C6A84F]">AXSENDA Labs</p><div className="mt-5 grid gap-10 lg:grid-cols-[1fr_.7fr] lg:items-end"><div><h1 className="font-[Cinzel] text-[clamp(3rem,7vw,6.8rem)] leading-[.92] tracking-[-.05em]">Intelligence built<br/>for <span className="text-[#D9BC63]">real operations.</span></h1></div><p className="max-w-xl text-base leading-8 text-zinc-400">Labs is AXSENDA's software and automation division. We build focused systems that remove operational friction and turn information into action.</p></div>
+<div className="mt-20 overflow-hidden rounded-[2rem] border border-[#C6A84F]/25 bg-gradient-to-br from-[#C6A84F]/[.07] to-white/[.015]"><div className="grid lg:grid-cols-[1.05fr_.95fr]"><div className="p-7 sm:p-10 lg:p-14"><div className="inline-flex items-center gap-2 rounded-full border border-[#C6A84F]/25 bg-[#C6A84F]/[.06] px-3 py-1.5 text-[9px] uppercase tracking-[.25em] text-[#D9BC63]"><Sparkles size={12}/>Active Product</div><h2 className="mt-7 font-[Cinzel] text-4xl sm:text-6xl">AXSENDA Capture</h2><p className="mt-5 max-w-2xl text-base leading-7 text-zinc-400">AI-powered customer communication for businesses that cannot afford to miss the next opportunity. Capture answers, understands the business, collects lead information, assists with scheduling, and gives the owner a structured record of what happened.</p><div className="mt-8 flex flex-wrap gap-3"><span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-500">AI Phone Answering</span><span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-500">Lead Capture</span><span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-500">Scheduling</span><span className="rounded-full border border-white/10 px-3 py-1.5 text-xs text-zinc-500">Business Knowledge</span></div></div><div className="grid gap-px border-t border-white/[.07] bg-white/[.07] sm:grid-cols-2 lg:border-l lg:border-t-0"><Capability icon={PhoneCall} title="Answer" text="Handle customer calls with a voice agent grounded in the business."/><Capability icon={Brain} title="Understand" text="Use services, policies, FAQs, pricing rules, and operating context."/><Capability icon={CalendarDays} title="Schedule" text="Assist with appointments and availability when the business enables it."/><Capability icon={MessageSquareText} title="Capture" text="Structure conversations into leads, customer records, and follow-up context."/></div></div></div>
+<div className="mt-8 rounded-[1.75rem] border border-white/[.07] bg-white/[.02] p-7 sm:p-9"><p className="text-[9px] uppercase tracking-[.26em] text-zinc-600">Labs roadmap</p><div className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between"><div><h3 className="font-[Cinzel] text-2xl">More systems will follow.</h3><p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">Capture is the first public expression of AXSENDA Labs. Future products will follow the same principle: focused software that solves measurable operational problems.</p></div><a href="#/" className="inline-flex shrink-0 items-center gap-2 text-sm text-[#D9BC63]">Back to AXSENDA <ArrowRight size={15}/></a></div></div></div></section></Layout>}
+function Capability({icon:Icon,title,text}){return <div className="bg-[#0A0A0A] p-7"><Icon className="text-[#C6A84F]" size={20}/><h3 className="mt-7 text-base font-semibold">{title}</h3><p className="mt-2 text-sm leading-6 text-zinc-500">{text}</p></div>}
