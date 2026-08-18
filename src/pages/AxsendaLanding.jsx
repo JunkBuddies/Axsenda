@@ -1,20 +1,24 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, BarChart3, BookOpen, Bot, Cpu, FlaskConical, GraduationCap, Layers3, Newspaper, PhoneCall, Users } from "lucide-react";
+import { ArrowRight, BarChart3, Bot, Cpu, FlaskConical, GraduationCap, Layers3, Newspaper, PhoneCall, Users } from "lucide-react";
 import Layout from "../components/Layout";
 
 const divisions = [
-  { name:"Labs", label:"Software & Intelligence", href:"#/labs", icon:FlaskConical },
-  { name:"Society", label:"Build with others", href:"#/society", icon:Users },
-  { name:"Press", label:"Ideas & insight", href:"#/press", icon:Newspaper },
-  { name:"Academy", label:"Learn & execute", href:"#/academy", icon:GraduationCap },
+  { name:"Labs", label:"Software & Intelligence", href:"#/labs", icon:FlaskConical, position:"axs-orbit-top" },
+  { name:"Society", label:"Build with others", href:"#/society", icon:Users, position:"axs-orbit-right" },
+  { name:"Press", label:"Ideas & insight", href:"#/press", icon:Newspaper, position:"axs-orbit-bottom" },
+  { name:"Academy", label:"Learn & execute", href:"#/academy", icon:GraduationCap, position:"axs-orbit-left" },
 ];
 
 function Orbit(){
   return <div className="relative mx-auto aspect-square w-full max-w-[610px]">
-    <div className="absolute inset-[5%] rounded-full border border-[#c8a64a]/20"/><div className="absolute inset-[18%] rounded-full border border-[#c8a64a]/10"/><div className="absolute inset-[31%] rounded-full border border-white/[.08]"/>
+    <div className="absolute inset-[5%] rounded-full border border-[#c8a64a]/20"/>
+    <div className="absolute inset-[18%] rounded-full border border-[#c8a64a]/10"/>
+    <div className="absolute inset-[31%] rounded-full border border-white/[.08]"/>
+
     <div className="axs-orbit-spinner absolute inset-[5%]">
-      {divisions.map((item,i)=>{const Icon=item.icon;return <a key={item.name} href={item.href} className="axs-orbit-node absolute left-1/2 top-1/2 z-20" style={{"--orbit-angle":`${i*90}deg`}}><span className="axs-orbit-counter block"><span className="group flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#c8a64a]/25 bg-[#11110f]/95 text-center shadow-[0_15px_55px_rgba(0,0,0,.45)] backdrop-blur-xl transition hover:border-[#e0bd5c]/65 hover:shadow-[0_0_45px_rgba(198,168,79,.15)] sm:h-32 sm:w-32"><Icon size={22} className="text-[#d4b34f]"/><span className="mt-2 text-[10px] font-semibold uppercase tracking-[.17em] text-zinc-100">{item.name}</span><span className="mt-1 max-w-[90px] text-[8px] leading-3 text-zinc-500">{item.label}</span></span></span></a>})}
+      {divisions.map((item)=>{const Icon=item.icon;return <a key={item.name} href={item.href} className={`axs-orbit-node ${item.position}`}><span className="axs-orbit-counter block"><span className="group flex h-28 w-28 flex-col items-center justify-center rounded-full border border-[#c8a64a]/25 bg-[#11110f]/95 text-center shadow-[0_15px_55px_rgba(0,0,0,.45)] backdrop-blur-xl transition hover:border-[#e0bd5c]/65 hover:shadow-[0_0_45px_rgba(198,168,79,.15)] sm:h-32 sm:w-32"><Icon size={22} className="text-[#d4b34f]"/><span className="mt-2 text-[10px] font-semibold uppercase tracking-[.17em] text-zinc-100">{item.name}</span><span className="mt-1 max-w-[90px] text-[8px] leading-3 text-zinc-500">{item.label}</span></span></span></a>})}
     </div>
+
     <div className="absolute left-1/2 top-1/2 z-30 flex h-44 w-44 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-[#d0ad4e]/45 bg-[radial-gradient(circle_at_50%_35%,rgba(198,168,79,.13),rgba(11,11,10,.97)_58%)] text-center shadow-[0_0_85px_rgba(198,168,79,.12)] sm:h-48 sm:w-48"><div className="text-3xl font-semibold tracking-[.18em] text-[#d4b25a]">AX</div><span className="mt-3 text-[9px] uppercase tracking-[.32em] text-[#d9bb67]">AXSENDA</span><span className="mt-2 text-[9px] uppercase tracking-[.18em] text-zinc-500">The ecosystem</span></div>
   </div>
 }
