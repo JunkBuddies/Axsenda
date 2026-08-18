@@ -28,18 +28,14 @@ function AcademySequence(){
  const wordSpacing=useTransform(p,[0,.12,.30,.41],[".00em",".025em",".075em",".13em"]);
 
  const atomOpacity=useTransform(p,[0,.36,.43,.62,.70,.76,.82,1],[0,0,1,1,.95,.72,.72,.72]);
- const atomScale=useTransform(p,[0,.39,.47,.60,.69,.76,.82,1],[.18,.18,.58,1.36,1,.66,.66,.66]);
+ const atomScale=useTransform(p,[0,.39,.47,.60,.69,.76,.82,1],[.18,.18,.58,1.18,.94,.66,.66,.66]);
  const atomRotate=useTransform(p,[0,.41,.72,.76,.82,1],[0,0,142,178,178,178]);
  const atomX=useTransform(p,[0,.62,.70,.76,.82,1],["0%","0%","14%","37%","37%","37%"]);
- const atomY=useTransform(p,[0,.48,.68,.76,.82,1],["5%","0%","0%","0%","0%","0%"]);
+ const atomY=useTransform(p,[0,.48,.68,.76,.82,1],["0%","0%","0%","0%","0%","0%"]);
 
- // CARD ARRIVAL: enters from below and reaches center by 82%.
  const contentOpacity=useTransform(p,[0,.66,.72,.78,.82,1],[0,0,.55,1,1,1]);
  const contentY=useTransform(p,[0,.65,.72,.78,.82,1],["62vh","62vh","24vh","7vh","0vh","0vh"]);
  const contentScale=useTransform(p,[0,.70,.78,.82,1],[.96,.96,.985,1,1]);
-
- // HOLD / RELEASE: from .82 to 1.00 nothing in the Academy composition moves.
- // The only motion is the document itself bringing the Society border upward.
  const stageOpacity=useTransform(p,[0,.80,.82,.995,1],[1,1,1,1,1]);
 
  return <section ref={ref} className="relative h-[320vh] border-t border-white/[.06] bg-[#090908]">
@@ -52,9 +48,11 @@ function AcademySequence(){
     <p className="mt-8 text-[10px] uppercase tracking-[.42em] text-zinc-500">The way out is built.</p>
    </motion.div>
 
-   <motion.div style={{scale:atomScale,rotate:atomRotate,x:atomX,y:atomY,opacity:atomOpacity,willChange:"transform, opacity"}} className="absolute left-1/2 top-1/2 h-[min(72vw,700px)] w-[min(72vw,700px)] -translate-x-1/2 -translate-y-1/2">
-    <div className="absolute inset-[4%] rounded-full border border-[#d2b151]/28"/><div className="absolute inset-[21%] rounded-full border border-white/[.10]"/><div className="absolute inset-[36%] rounded-full border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[92%] w-[36%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[36%] w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-white/[.09]"/><div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#d6b653]/45 bg-[#11110f] shadow-[0_0_80px_rgba(198,168,79,.13)]"><GraduationCap className="text-[#ddb958]" size={30}/></div>
-   </motion.div>
+   <div className="pointer-events-none absolute left-1/2 top-1/2 h-[min(64vw,560px)] w-[min(64vw,560px)] -translate-x-1/2 -translate-y-1/2">
+    <motion.div style={{scale:atomScale,rotate:atomRotate,x:atomX,y:atomY,opacity:atomOpacity,willChange:"transform, opacity"}} className="relative h-full w-full">
+     <div className="absolute inset-[4%] rounded-full border border-[#d2b151]/28"/><div className="absolute inset-[21%] rounded-full border border-white/[.10]"/><div className="absolute inset-[36%] rounded-full border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[92%] w-[36%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-[#c8a64a]/22"/><div className="absolute left-1/2 top-1/2 h-[36%] w-[92%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-white/[.09]"/><div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-[#d6b653]/45 bg-[#11110f] shadow-[0_0_80px_rgba(198,168,79,.13)]"><GraduationCap className="text-[#ddb958]" size={30}/></div>
+    </motion.div>
+   </div>
 
    <motion.div style={{opacity:contentOpacity,y:contentY,scale:contentScale,willChange:"transform, opacity"}} className="absolute inset-0 z-20 flex items-center justify-center px-5 py-5 sm:px-8 lg:px-10">
     <div className="grid w-full max-w-[1480px] items-center gap-8 lg:grid-cols-[.95fr_1.05fr]">
